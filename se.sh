@@ -26,5 +26,9 @@ if ! tmux has-session -t "$SELECTED_NAME"; then
     tmux select-window -t "$SELECTED_NAME:1"
 fi
 
-tmux switch-client -t "$SELECTED_NAME"
+if [[ -n "$TMUX" ]]; then
+    tmux switch-client -t "$SELECTED_NAME"
+else
+    tmux attach-session -t "$SELECTED_NAME"
+fi
 
